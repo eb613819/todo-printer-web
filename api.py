@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-DATA_FILE = Path(os.environ.get("TASKS_FILE", "YOUR_PRINTER_IP"))
+DATA_FILE = Path(os.environ.get("TASKS_FILE", "tasks.json"))
 PRINTER_IP = os.environ.get("PRINTER_IP", "192.168.1.87")
 PRINTER_PORT = int(os.environ.get("PRINTER_PORT", "9100"))
 STATIC_DIR = Path(__file__).parent / "ui" / "dist" / "ui" / "browser"

@@ -1,0 +1,41 @@
+<div class="page">
+  <header class="topbar">
+    <div class="topbar-border">{{ borderString }}</div>
+    <div class="topbar-main">
+      <div class="topbar-left">
+        <span class="logo-title">TODO</span>
+        <span class="logo-sub">todo printer dashboard</span>
+      </div>
+      <div class="actions">
+        <button class="btn-ghost" (click)="printAll()">print all</button>
+        <button class="btn-primary" (click)="showNewGroup = !showNewGroup">+ new group</button>
+      </div>
+    </div>
+    <div class="topbar-border">{{ borderString }}</div>
+  </header>
+
+  <div class="content">
+    <div class="grid">
+      <div class="new-group-card" *ngIf="showNewGroup">
+        <span class="new-group-title">NEW GROUP</span>
+        <span class="new-group-divider">------------------------</span>
+        <input [(ngModel)]="newGroupName" placeholder="group name" (keydown.enter)="createGroup()" />
+        <input [(ngModel)]="newGroupTasks" placeholder="initial tasks, comma separated" (keydown.enter)="createGroup()" />
+        <div class="new-group-actions">
+          <button (click)="showNewGroup = false">cancel</button>
+          <button class="btn-create" (click)="createGroup()">create</button>
+        </div>
+      </div>
+
+      <app-group-card
+        *ngFor="let group of groupNames()"
+        [groupName]="group"
+        [tasks]="tasks[group]"
+        (addTasks)="onAddTasks(group, $event)"
+        (removeTask)="onRemoveTask(group, $event)"
+        (removeGroup)="onRemoveGroup(group)"
+        (printGroup)="onPrintGroup(group)"
+      ></app-group-card>
+    </div>
+  </div>
+</div>

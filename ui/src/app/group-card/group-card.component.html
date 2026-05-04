@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <span class="border-top">************************************************************************************************</span>
+    <span class="group-name">{{ groupName.toUpperCase() }}</span>
+    <span class="divider">------------------------------------------------------------------------------------------------</span>
+  </div>
+
+  <ul class="task-list">
+    <li *ngFor="let task of tasks; let i = index" class="task-item">
+      <span class="checkbox">[ ]</span>
+      <span class="task-text">{{ i + 1 }}. {{ task }}</span>
+      <button class="btn-remove" (click)="removeTask.emit(i)">✕</button>
+    </li>
+    <li *ngIf="tasks.length === 0" class="task-empty">no tasks yet</li>
+  </ul>
+
+  <div class="card-footer">
+      <div class="add-row">
+        <input
+          [(ngModel)]="newTaskInput"
+          (keydown)="onKeydown($event)"
+          placeholder="add tasks, comma separated..."
+          />
+        <button (click)="onAddTasks()">add</button>
+      </div>
+    <span class="divider">------------------------------------------------------------------------------------------------</span>
+    <div class="card-actions">
+      <button (click)="printGroup.emit()">print</button>
+      <button class="btn-danger" (click)="removeGroup.emit()">delete group</button>
+    </div>
+  </div>
+  <span class="divider">========================================================================================</span>
+</div>

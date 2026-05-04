@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1a1a1a;
+  background-image: radial-gradient(#333 1px, transparent 1px);
+  background-size: 20px 20px;
+  min-height: 100vh;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  color: #1a1a1a;
+}
