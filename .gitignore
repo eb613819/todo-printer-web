@@ -26,3 +26,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#Tasks File
+tasks.json
+
+#Python Stuff
+__pycache__/
+*.pyc
