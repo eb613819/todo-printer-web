@@ -111,7 +111,6 @@ def print_groups(body: PrintRequest):
         raise HTTPException(status_code=400, detail="No valid groups to print")
 
     if len(valid_groups) == 1:
-        # Single group: group name is the title
         group = valid_groups[0]
         p.set(align="center", bold=True)
         p.text(BORDER + "\n")
@@ -124,12 +123,11 @@ def print_groups(body: PrintRequest):
         p.set(align="center", bold=False)
         p.text(f"{now}\n")
         p.text(THICK + "\n")
-        p.set(align="left", bold=False)
+        p.set(align="left", bold=False, double_height=False, double_width=False, font='b')
         p.text(THIN + "\n")
         for idx, task in enumerate(tasks[group], 1):
-            p.text(f"[ ] {idx}. {task}\n")
+            p.text(f"[ ] {idx}. {task}\n\n")
     else:
-        # Multiple groups:date at top, groups with dividers
         p.set(align="center", bold=False)
         p.text(BORDER + "\n")
         p.text(f"{now}\n")
@@ -139,10 +137,10 @@ def print_groups(body: PrintRequest):
                 p.text(THICK + "\n")
             p.set(align="center", bold=True)
             p.text(f"{group.upper()}\n")
-            p.set(align="left", bold=False)
+            p.set(align="left", bold=False, double_height=False, double_width=False, font='b')
             p.text(THIN + "\n")
             for idx, task in enumerate(tasks[group], 1):
-                p.text(f"[ ] {idx}. {task}\n")
+                p.text(f"[ ] {idx}. {task}\n\n")
 
     p.set(align="center", bold=False)
     p.text(THICK + "\n")
