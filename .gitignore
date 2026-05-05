@@ -33,3 +33,7 @@ tasks.json
 #Python Stuff
 __pycache__/
 *.pyc
+
+#UI Stuff
+ui/.vscode/
+ui/dist/
