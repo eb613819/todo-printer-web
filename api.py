@@ -121,24 +121,24 @@ def print_groups(body: PrintRequest):
         p.text("*" + " " * (WIDE - 2) + "*\n")
         p.text(BORDER + "\n")
         p.set(align="center", bold=False)
-        p.text(f"{now}\n")
         p.text(THICK + "\n")
-        p.set(align="left", bold=False, double_height=False, double_width=False, font='b')
+        p.text(f"{now}\n")
         p.text(THIN + "\n")
+        p.set(align="left", bold=False, double_height=False, double_width=False, font='b')
         for idx, task in enumerate(tasks[group], 1):
             p.text(f"[ ] {idx}. {task}\n\n")
     else:
         p.set(align="center", bold=False)
         p.text(BORDER + "\n")
-        p.text(f"{now}\n")
         p.text(THICK + "\n")
+        p.text(f"{now}\n")
         for i, group in enumerate(valid_groups):
             if i > 0:
                 p.text(THICK + "\n")
             p.set(align="center", bold=True)
             p.text(f"{group.upper()}\n")
-            p.set(align="left", bold=False, double_height=False, double_width=False, font='b')
             p.text(THIN + "\n")
+            p.set(align="left", bold=False, double_height=False, double_width=False, font='b')
             for idx, task in enumerate(tasks[group], 1):
                 p.text(f"[ ] {idx}. {task}\n\n")
 
