@@ -7,6 +7,7 @@ A web dashboard for managing thermal receipt printer to-do lists. Create groups,
 ## Preview
 
 ![Todo Printer Web dashboard showing task group cards](images/preview.png)
+![Example Todo Receipt](images/receipt.png)
 
 ---
 
@@ -233,6 +234,15 @@ After making changes to the Angular app, rebuild and restart:
 cd ui && ng build
 sudo systemctl restart todo_web
 ```
+
+---
+
+## Optional: Ticket Rail
+
+If you want to display printed tickets, this 3D printable ticket rail works
+great with 80mm receipt paper:
+
+[Ticket Rails by Tumblefluff — Printables](https://www.printables.com/model/997430-ticket-rails/)
 
 ---
 
