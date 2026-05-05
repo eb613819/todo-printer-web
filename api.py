@@ -103,34 +103,46 @@ def print_groups(body: PrintRequest):
         p = Network(PRINTER_IP, PRINTER_PORT)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Printer connection failed: {e}")
-    
-    now = datetime.now().strftime("%b %d, %Y  %I:%M %p")
-    
-    p.set(align="center", bold=True)
-    p.text(BORDER + "\n")
-    p.text("*" + " " * (WIDE - 2) + "*\n")
-    p.set(align="center", bold=True, double_height=True, double_width=True)
-    p.text("  TO-DO  \n")
-    p.set(align="center", bold=False, double_height=False, double_width=False)
-    p.text("*" + " " * (WIDE - 2) + "*\n")
-    p.text(BORDER + "\n")
-    p.set(align="center", bold=False)
-    p.text(f"{now}\n")
-    p.text(THICK + "\n")
 
-    for i, group in enumerate(body.groups):
-        name = group.strip().lower()
-        if name not in tasks:
-            continue
-        if i > 0:
-            p.set(align="center")
-            p.text(THICK + "\n")
+    now = datetime.now().strftime("%b %d, %Y  %I:%M %p")
+    valid_groups = [g.strip().lower() for g in body.groups if g.strip().lower() in tasks]
+
+    if not valid_groups:
+        raise HTTPException(status_code=400, detail="No valid groups to print")
+
+    if len(valid_groups) == 1:
+        # Single group: group name is the title
+        group = valid_groups[0]
         p.set(align="center", bold=True)
-        p.text(f"{name.upper()}\n")
+        p.text(BORDER + "\n")
+        p.text("*" + " " * (WIDE - 2) + "*\n")
+        p.set(align="center", bold=True, double_height=True, double_width=True)
+        p.text(f" {group.upper()} \n")
+        p.set(align="center", bold=False, double_height=False, double_width=False)
+        p.text("*" + " " * (WIDE - 2) + "*\n")
+        p.text(BORDER + "\n")
+        p.set(align="center", bold=False)
+        p.text(f"{now}\n")
+        p.text(THICK + "\n")
         p.set(align="left", bold=False)
         p.text(THIN + "\n")
-        for idx, task in enumerate(tasks[name], 1):
+        for idx, task in enumerate(tasks[group], 1):
             p.text(f"[ ] {idx}. {task}\n")
+    else:
+        # Multiple groups:date at top, groups with dividers
+        p.set(align="center", bold=False)
+        p.text(BORDER + "\n")
+        p.text(f"{now}\n")
+        p.text(THICK + "\n")
+        for i, group in enumerate(valid_groups):
+            if i > 0:
+                p.text(THICK + "\n")
+            p.set(align="center", bold=True)
+            p.text(f"{group.upper()}\n")
+            p.set(align="left", bold=False)
+            p.text(THIN + "\n")
+            for idx, task in enumerate(tasks[group], 1):
+                p.text(f"[ ] {idx}. {task}\n")
 
     p.set(align="center", bold=False)
     p.text(THICK + "\n")
