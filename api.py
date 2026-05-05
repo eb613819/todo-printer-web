@@ -142,7 +142,7 @@ def print_groups(body: PrintRequest):
             for idx, task in enumerate(tasks[group], 1):
                 p.text(f"[ ] {idx}. {task}\n\n")
 
-    p.set(align="center", bold=True, double_height=True, double_width=True)
+    p.set(align="center", bold=False, double_height=True, double_width=True)
     p.text(THICK + "\n")
     p.text("\n\n")
     p.cut()
